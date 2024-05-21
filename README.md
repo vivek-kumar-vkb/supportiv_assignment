@@ -6,16 +6,15 @@
 * We will create an encoder/decoder model that will take the data that we provide and output our response using the techniques of machine translation.
 
 ## Below is the high level process of what we aim to do .
-![1_R-Ul_DUk74cj79bPr5UalQ](https://github.com/ArranabManhas/Supportiv_assignment/assets/112387404/a6760c47-1e90-44a5-8eaf-2b36e44759e4)
+
 
 In place of Marathi words we want our model to output the answers to the question provided as input to the encoder.
 **At a very high level, an encoder-decoder model can be thought of as two blocks, the encoder and the decoder connected by a vector which we will refer to as the ‘context vector’.**
 * Encoder: The encoder processes each token in the input-sequence. It tries to cram all the information about the input-sequence into a vector of fixed length i.e. the ‘context vector’. After going through all the tokens, the encoder passes this vector onto the decoder.
-![Screenshot 2024-05-21 014329](https://github.com/ArranabManhas/Supportiv_assignment/assets/112387404/6b82d76a-c4ac-426b-a315-cbe58b0c077c)
+
 
 * Context vector: The vector is built in such a way that it's expected to encapsulate the whole meaning of the input-sequence and help the decoder make accurate predictions. We will see later that this is the final internal states of our encoder block.
 * Decoder: The decoder reads the context vector and tries to predict the target-sequence token by token.
-![Screenshot 2024-05-21 014424](https://github.com/ArranabManhas/Supportiv_assignment/assets/112387404/f7cb01ac-199b-49d3-8570-603ec955e3f2)
 
 ## Assumptions made by our SEQ2SEQ Model:
 1. Equal Importance of All Inputs: All tokens in the input sequence are treated equally, regardless of their position or relevance to the current decoding step. This means that the model does not explicitly prioritize certain parts of the input sequence over others during decoding.
@@ -25,8 +24,6 @@ In place of Marathi words we want our model to output the answers to the questio
 ## Model Performance:
 * LOSS FUNCTION USED:-**SparseCategoricalCrossentropy** with masking layer to ignore the padding of 0 for maintaining uniform length.
 
-  
-![Screenshot 2024-05-21 020023](https://github.com/ArranabManhas/Supportiv_assignment/assets/112387404/5003d234-7a89-4f91-9293-418588544508)
 
 ## Metrics used to find validation accuracy:
 * We compare the predicted sentence to the true sentene and try to find out the number of words correctly predicted as n_correct to the total nuumber of words in the sentence.
@@ -43,6 +40,7 @@ Model performance is graphical shown in code file attached wrt number of epoch d
 3. **Inability to Handle Variable-Length Sequences:** The model without attention assumes fixed-length input and output sequences, making it less flexible in handling variable-length input and output sequences. It requires padding or truncation of sequences to a fixed length, which can introduce unnecessary complexity and inefficiency.
 
 ## Potention Future improvements:
+1. **Questions can be taken as input**: The questions were given implicitly it can also be done by taking input from user and then pass it into the print_conversation() function
 1. **Attention Mechanism**: Introducing an attention mechanism allows the model to dynamically focus on different parts of the input sequence during decoding. This helps the model handle long-range dependencies and better capture the alignment between input and output sequences.
 2. **Larger Hidden State Size:** Increasing the size of the hidden states in both the encoder and decoder can help the model learn more complex representations of the input and output sequences. Larger hidden states provide the model with more capacity to capture and represent the semantic meaning of the input sequence and generate accurate predictions for the output sequence.
 3. **Model Ensembling:** Combining the predictions of multiple independently trained seq2seq models can help improve the overall performance and robustness of the system. Each model may have different strengths and weaknesses, and ensembling helps mitigate individual model biases and errors.
